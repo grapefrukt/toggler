@@ -1,0 +1,11 @@
+{
+  "name": "toggler",
+  "url": "http://github.com/grapefrukt/toggler",
+  "license": "MIT",
+  "tags": [ "flash", "cpp", "neko", "js" ],
+  "description": "Toggler is a library that provides a simple interface to tweak configuration variables at runtime",
+  "version": "0.0.1",
+  "releasenote": "First release",
+  "contributors": [ "grapefrukt" ],
+  "dependencies": {}
+}
