@@ -87,7 +87,7 @@ class Toggler extends Sprite {
 				property.type = Type.typeof(Reflect.field(targetClass, field));
 				property.header = getGroupName(field);
 				
-				trace("field: " + field + " group: " + property.header);
+				//trace("field: " + field + " group: " + property.header);
 				
 				if (property.type == ValueType.TFloat || property.type == ValueType.TInt) {
 					property.min = property.value / 2;
