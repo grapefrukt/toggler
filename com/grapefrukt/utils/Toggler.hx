@@ -139,7 +139,7 @@ class Toggler extends Sprite {
 				var row:HBox = new HBox(cast(window.content.getChildAt(0), DisplayObjectContainer));
 				var label:Label = new Label(row, 0, 0, prettify(property.name, property.header));
 				label.autoSize = false;
-				label.width = 120;
+				label.width = 110;
 				
 				if (Type.enumEq(property.type, ValueType.TBool)) {
 					var checkbox:CheckBox = new CheckBox(row, 0, 0, "");
@@ -147,9 +147,13 @@ class Toggler extends Sprite {
 					checkbox.addEventListener(Event.CHANGE, getToggleClosure(checkbox, property));
 				} else if (Type.enumEq(property.type, ValueType.TFloat) || Type.enumEq(property.type, ValueType.TInt)) {
 					var slider:HUISlider = new HUISlider(row, 0, 0, "");
-					slider.width = 130;
+					slider.width = 230;
 					slider.tick = (property.max - property.min) / 100;
-					if (Type.enumEq(property.type, ValueType.TInt)) slider.tick = 1;
+					slider.labelPrecision = 2;
+					if (Type.enumEq(property.type, ValueType.TInt)) {
+						slider.tick = 1;
+						slider.labelPrecision = 0;
+					}
 					slider.minimum = property.min;
 					slider.maximum = property.max;
 					slider.value = property.value;
