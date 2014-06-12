@@ -31,6 +31,7 @@ package com.bit101.components;
 import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
 import flash.events.MouseEvent;
+import openfl.events.Event;
 
 class CheckBox extends Component
 {
@@ -159,6 +160,7 @@ class CheckBox extends Component
 	{
 		_selected = !_selected;
 		_button.visible = _selected;
+		dispatchEvent(new Event(Event.CHANGE));
 	}
 	
 	
