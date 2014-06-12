@@ -121,7 +121,7 @@ class Toggler extends Sprite {
 			while (numChildren > 0) removeChildAt(0);
 			
 			var settingWindow:Window = new Window(this, 10, 10);
-			settingWindow.title = "JUICEATRON 7001 ZZ";
+			settingWindow.title = "TOGGLER";
 			settingWindow.width = WIDTH;
 			settingWindow.height = maxHeight - 50;
 			
@@ -133,7 +133,6 @@ class Toggler extends Sprite {
 					accordion.addWindowAt(property.header, accordion.numWindows);
 					window = accordion.getWindowAt(accordion.numWindows - 1);
 					var container:VBox = new VBox(window.content, 10, 10);
-					trace("added new thing");
 				}
 				
 				var row:HBox = new HBox(cast(window.content.getChildAt(0), DisplayObjectContainer));
