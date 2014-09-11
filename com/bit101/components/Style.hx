@@ -46,7 +46,7 @@ class Style
 	public static var LIST_SELECTED:Int = 0xCCCCCC;
 	public static var LIST_ROLLOVER:Int = 0xDDDDDD;
 	
-	public static var embedFonts:Bool = true;
+	public static var embedFonts:Bool = false;
 	public static var fontClass:Class<Font>;
 	public static var fontSize:Float = 12;
 	
