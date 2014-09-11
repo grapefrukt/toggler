@@ -70,6 +70,18 @@ class Slider extends Component
 		{
 			addEventListener(Event.CHANGE, defaultHandler);
 		}
+		
+		addEventListener(MouseEvent.MOUSE_WHEEL, handleWheel);
+	}
+	
+	private function handleWheel(e:MouseEvent):Void {
+		e.stopPropagation();
+		var step = e.delta > 0 ? _tick : -_tick;
+		
+		if (!e.shiftKey) step *= 3;
+		
+		value += step;
+		dispatchEvent(new Event(Event.CHANGE));
 	}
 	
 	/**

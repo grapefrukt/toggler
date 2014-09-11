@@ -12,6 +12,7 @@ import openfl.display.DisplayObjectContainer;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.KeyboardEvent;
+import openfl.events.MouseEvent;
 import openfl.Lib;
 import openfl.ui.Keyboard;
 import openfl.ui.Mouse;
@@ -56,6 +57,7 @@ class Toggler extends Sprite {
 			
 			reset();
 			addEventListener(Event.ADDED_TO_STAGE, handleAddedToStage);
+			addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
 		}
 		
 		public function reset(targetClass:Dynamic = null) {
@@ -209,8 +211,13 @@ class Toggler extends Sprite {
 		
 		private function handleKeyDown(e:KeyboardEvent) {
 			if (e.keyCode == Keyboard.TAB) visible = !visible;
-			if (visible) Mouse.show();
-			if (!visible) Mouse.hide();
+			//if (visible) Mouse.show();
+			//if (!visible) Mouse.hide();
+		}
+		
+		private function handleMouseDown(e:Event):Void {
+			e.stopPropagation();
+			e.stopImmediatePropagation();
 		}
 		
 		private function _sort(p1:Property, p2:Property):Int {
