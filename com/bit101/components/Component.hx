@@ -293,7 +293,7 @@ class Component extends Sprite
 		return _enabled;
 	}
 	
-	#if !flash
+	#if (!flash && !html5)
 	override function set_filters(value:Array<Dynamic>):Array<Dynamic>
 	{
 		return value;
