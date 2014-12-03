@@ -9,6 +9,8 @@ import com.bit101.components.ScrollPane;
 import com.bit101.components.Style;
 import com.bit101.components.VBox;
 import com.bit101.components.Window;
+import haxe.Timer;
+import openfl.display.DisplayObject;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
@@ -73,6 +75,8 @@ class TogglerUI extends Sprite {
 			}
 		}
 		
+		var endPad = new Label(list);
+		
 		pane.y = tabs.height;
 		
 		pane.height = window.getMaxContentHeight() - tabs.height;
@@ -83,7 +87,21 @@ class TogglerUI extends Sprite {
 	function getTabClosure(tab:PushButton, rowlabel:HeaderLabel) {
 		return function(e:Event){
 			pane.scrollTo(0, rowlabel.y);
+			blink(rowlabel);
 		}
+	}
+	
+	function blink(target:DisplayObject, count:Int = 4, delayMS:Int = 75) {
+		target.visible = !target.visible;
+		
+		if (count <= 0){
+			target.visible = true;
+			return;
+		}
+		
+		Timer.delay(function(){
+			blink(target, count - 1, delayMS);
+		}, delayMS);		
 	}
 	
 	function prettyPrint(string:String, removeLeading:String = '') {
