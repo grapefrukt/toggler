@@ -7,7 +7,7 @@ import com.grapefrukt.utils.toggler.properties.TogglerPropertyBase;
  */
 class TogglerPropertyGroup {
 
-	public var name(default, null):String;
+	public var name:String;
 	public var properties(default, null):Array<TogglerPropertyBase>;
 	
 	public function new(name:String) {
