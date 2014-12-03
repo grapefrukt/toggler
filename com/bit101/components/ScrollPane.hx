@@ -83,9 +83,12 @@ class ScrollPane extends Panel
 	}
 	
 	
-
-	
-	
+	public function scrollTo(x:Float, y:Float){
+		_hScrollbar.value = x;
+		_vScrollbar.value = y;
+		onScroll(null);
+	}
+		
 	///////////////////////////////////
 	// public methods
 	///////////////////////////////////

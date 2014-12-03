@@ -111,8 +111,9 @@ class Toggler extends Sprite {
 						property.max = range[1];
 					}
 					
-					var reset = Reflect.field(meta, "reset");
-					if (reset == true) property.reset = true;
+					//var reset = Reflect.field(meta, "reset");
+					//if (reset == true) 
+					property.reset = true;
 				}
 				
 				properties.push(property);
@@ -200,6 +201,7 @@ class Toggler extends Sprite {
 		private function getSliderClosure(slider:HUISlider, property:Property) {
 			return function(e:Event) {
 				Reflect.setField(targetClass, property.name, slider.value);
+				trace(slider.value);
 				if (property.reset && resetGame != null) resetGame();
 			}
 		}

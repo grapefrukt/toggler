@@ -79,12 +79,12 @@ class Accordion extends Component
 	 * Adds a new window to the bottom of the accordion.
 	 * @param title The title of the new window.
 	 */
-	public function addWindow(title:String):Void
+	public function addWindow(title:String):Window
 	{
-		addWindowAt(title, _windows.length);
+		return addWindowAt(title, _windows.length);
 	}
 	
-	public function addWindowAt(title:String, index:Int):Void
+	public function addWindowAt(title:String, index:Int):Window
 	{
 		index = Std.int(Math.min(index, _windows.length));
 		index = Std.int(Math.max(index, 0));
@@ -97,6 +97,8 @@ class Accordion extends Component
 		_windows.insert(index, window);
 		_winHeight = _height - (_windows.length - 1) * 20;
 		setSize(_winWidth, _winHeight);
+		
+		return window;
 	}
 	
 	/**

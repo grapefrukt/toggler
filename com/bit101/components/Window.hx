@@ -74,6 +74,10 @@ class Window extends Component
 		setSize(100, 100);
 	}
 	
+	public function getMaxContentHeight(){
+		return _height - _titleBar.height;
+	}
+	
 	/**
 	 * Creates and adds the child display objects of this component.
 	 */

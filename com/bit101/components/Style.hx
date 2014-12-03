@@ -48,7 +48,7 @@ class Style
 	
 	public static var embedFonts:Bool = false;
 	public static var fontClass:Class<Font>;
-	public static var fontSize:Float = 12;
+	public static var fontSize:Float = 10;
 	
 	public static inline var DARK:String = "dark";
 	public inline static var BLACK:String = "black";
