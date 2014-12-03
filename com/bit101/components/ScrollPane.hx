@@ -59,10 +59,17 @@ class ScrollPane extends Panel
 	{
 		super.init();
 		addEventListener(Event.RESIZE, onResize);
+		addEventListener(MouseEvent.MOUSE_WHEEL, onWheel);
 		_background.addEventListener(MouseEvent.MOUSE_DOWN, onMouseGoDown);
 		_background.useHandCursor = true;
 		_background.buttonMode = true;
 		setSize(100, 100);
+	}
+	
+	function onWheel(e:MouseEvent) {
+		e.stopPropagation();
+		_vScrollbar.value -= 20 * e.delta;
+		onScroll(null);
 	}
 	
 	/**

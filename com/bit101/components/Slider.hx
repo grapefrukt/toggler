@@ -74,7 +74,7 @@ class Slider extends Component
 		addEventListener(MouseEvent.MOUSE_WHEEL, handleWheel);
 	}
 	
-	private function handleWheel(e:MouseEvent):Void {
+	function handleWheel(e:MouseEvent) {
 		e.stopPropagation();
 		var step = e.delta > 0 ? _tick : -_tick;
 		
