@@ -48,7 +48,7 @@ class Style
 	
 	public static var embedFonts:Bool = false;
 	public static var fontClass:Class<Font>;
-	public static var fontSize:Float = 10;
+	public static var fontSize:Float = 11;
 	
 	public static inline var DARK:String = "dark";
 	public inline static var BLACK:String = "black";
@@ -91,7 +91,7 @@ class Style
 				Style.BUTTON_FACE = 0x666666;
 				Style.BUTTON_DOWN = 0x222222;
 				Style.INPUT_TEXT = 0xBBBBBB;
-				Style.LABEL_TEXT = 0xCCCCCC;
+				Style.LABEL_TEXT = 0xF7F7F7;
 				Style.PANEL = 0x666666;
 				Style.PROGRESS_BAR = 0x666666;
 				Style.TEXT_BACKGROUND = 0x555555;
