@@ -14,6 +14,7 @@ import haxe.Timer;
 import openfl.display.DisplayObject;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import openfl.events.KeyboardEvent;
 import openfl.events.MouseEvent;
 import openfl.Lib;
 
@@ -25,13 +26,13 @@ class TogglerUI extends Sprite {
 	
 	static inline var WIDTH_TAB				= 80;
 	static inline var WIDTH_SCROLLBAR		= 10;
-	static inline var WIDTH_PROPERTY_LABEL	= 100;
-	static inline var WIDTH_VALUE_INPUT		= 40;
+	static inline var WIDTH_PROPERTY_LABEL	= 130;
+	static inline var WIDTH_VALUE_INPUT		= 50;
 	static inline var MARGIN_LIST			= 10;
 	static inline var MARGIN_PROPERTY		= 5;
 	static inline var MARGIN_HEADER			= 5;
 	
-	static inline var DRAG_TICK_SIZE			= 20;
+	static inline var DRAG_TICK_SIZE		= 10;
 	
 	var core			:TogglerCore;
 	var window			:Window;
@@ -102,13 +103,19 @@ class TogglerUI extends Sprite {
 		
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
 		Lib.current.stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
+		
+		addEventListener(MouseEvent.MOUSE_DOWN, handleEatEvent);
+		addEventListener(KeyboardEvent.KEY_DOWN, handleEatEvent);
+		addEventListener(KeyboardEvent.KEY_UP, handleEatEvent);
 	}
 	
 	function handleMouseUp(e:MouseEvent) {
+		e.stopPropagation();
 		dragProperty = null;
 	}
 	
 	function handleMouseMove(e:MouseEvent) {
+		e.stopPropagation();
 		if (dragProperty == null) return;
 		
 		var precision = 2;
@@ -133,6 +140,9 @@ class TogglerUI extends Sprite {
 		dragValue += step * stepCount * (isPositive ? 1 : -1);
 		
 		var rounded = roundToSignificant(dragValue, precision);
+		if (dragProperty.hasMax && rounded > dragProperty.max) rounded = dragProperty.max;
+		if (dragProperty.hasMin && rounded < dragProperty.min) rounded = dragProperty.min;
+		
 		dragInput.text = Std.string(rounded);
 		dragProperty.value = rounded;
 	}
@@ -140,6 +150,11 @@ class TogglerUI extends Sprite {
 	function handleLabelRoll(e:MouseEvent) {
 		var label:Label = cast e.target;
 		label.textField.scrollH = e.type == MouseEvent.MOUSE_OVER ? label.textField.maxScrollH : 0;
+	}
+	
+	// this prevents input events to the ui bubbling up to the game (it's not perfect, but it helps)
+	function handleEatEvent(e:Event) {
+		e.stopPropagation();
 	}
 	
 	function getTabClosure(tab:PushButton, rowlabel:HeaderLabel) {
@@ -171,6 +186,7 @@ class TogglerUI extends Sprite {
 			blink(target, count - 1, delayMS);
 		}, delayMS);		
 	}
+	
 	
 	function prettyPrint(string:String, removeLeading:String = '') {
 		if (removeLeading != '' && string.indexOf(removeLeading) == 0) {
