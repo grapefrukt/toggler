@@ -1,7 +1,6 @@
 package com.grapefrukt.utils.toggler;
 import com.bit101.components.HBox;
 import com.bit101.components.HeaderLabel;
-import com.bit101.components.HUISlider;
 import com.bit101.components.HVBox;
 import com.bit101.components.InputText;
 import com.bit101.components.Label;
@@ -32,7 +31,7 @@ class TogglerUI extends Sprite {
 	static inline var MARGIN_PROPERTY		= 5;
 	static inline var MARGIN_HEADER			= 5;
 	
-	static inline var DRAG_RANGE			= 100;
+	static inline var DRAG_TICK_SIZE			= 20;
 	
 	var core			:TogglerCore;
 	var window			:Window;
@@ -40,9 +39,9 @@ class TogglerUI extends Sprite {
 	
 	var dragProperty	:TogglerPropertyBase;
 	var dragInput		:InputText;
-	var dragStartX		:Float = 0;
-	var dragStartValue	:Float = 0;
-	var dragPrecision	:Int = 2;
+	var dragLastTickX	:Float = 0;
+	var dragStepSize	:Float = 0;
+	var dragValue		:Float = 0;
 	
 	public function new(core:TogglerCore) {
 		super();
@@ -111,11 +110,31 @@ class TogglerUI extends Sprite {
 	
 	function handleMouseMove(e:MouseEvent) {
 		if (dragProperty == null) return;
-		dragPrecision = 2;
-		if (e.ctrlKey) dragPrecision = 3;
-		if (e.shiftKey) dragPrecision = 1;
 		
-		dragInput.text = Std.string(roundToSignificant(dragStartValue + dragStartValue * ((e.stageX - dragStartX) / DRAG_RANGE), dragPrecision));
+		var precision = 2;
+		var step = dragStepSize;
+		
+		if (e.shiftKey) {
+			precision = 2;
+			step *= 10;
+		} else if (e.ctrlKey) {
+			precision = 3;
+			step /= 10;
+		}
+		
+		var stepCount = 0;
+		var isPositive = e.stageX - dragLastTickX > 0;
+		while (Math.abs(e.stageX - dragLastTickX) > DRAG_TICK_SIZE) {
+			stepCount++;
+			dragLastTickX += isPositive ? DRAG_TICK_SIZE : -DRAG_TICK_SIZE;
+			
+			if (stepCount > 100) return; // max limit for moved distance, will likely never be hit
+		}
+		dragValue += step * stepCount * (isPositive ? 1 : -1);
+		
+		var rounded = roundToSignificant(dragValue, precision);
+		dragInput.text = Std.string(rounded);
+		dragProperty.value = rounded;
 	}
 	
 	function handleLabelRoll(e:MouseEvent) {
@@ -134,8 +153,9 @@ class TogglerUI extends Sprite {
 		return function(e:MouseEvent){
 			dragProperty = property;
 			dragInput = input;
-			dragStartValue = property.value;
-			dragStartX = e.stageX;
+			dragValue = property.value;
+			dragLastTickX = e.stageX;
+			dragStepSize = property.value / 100;
 		}
 	}
 	
