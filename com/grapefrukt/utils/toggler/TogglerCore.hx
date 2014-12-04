@@ -37,8 +37,6 @@ class TogglerCore {
 			property.name = field;
 			property.value = Reflect.field(targetClass, field);
 			property.group = getGroupName(field);
-			property.min = property.value / 2;
-			property.max = property.value * 2;
 			
 			applyMeta(property, Reflect.field(metadata, field));
 			if (property.hidden) continue;
@@ -89,6 +87,8 @@ class TogglerCore {
 		if (range != null) {
 			property.min = range[0];
 			property.max = range[1];
+			property.hasMax = true;
+			property.hasMin = true;
 		}
 		
 		property.reset = Reflect.field(meta, "reset");

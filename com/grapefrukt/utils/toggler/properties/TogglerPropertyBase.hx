@@ -13,11 +13,13 @@ class TogglerPropertyBase {
 	
 	public var hidden	:Bool = false;
 	public var reset	:Bool = false;
+	public var hasMax	:Bool = false;
+	public var hasMin	:Bool = false;
 	
 	public var value(get, set)	:Dynamic;
 	public var max(get, set)	:Dynamic;
 	public var min(get, set)	:Dynamic;
-		
+	
 	public function new() {
 		
 	}
