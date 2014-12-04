@@ -42,6 +42,7 @@ class TogglerUI extends Sprite {
 	var dragInput		:InputText;
 	var dragStartX		:Float = 0;
 	var dragStartValue	:Float = 0;
+	var dragPrecision	:Int = 2;
 	
 	public function new(core:TogglerCore) {
 		super();
@@ -110,7 +111,11 @@ class TogglerUI extends Sprite {
 	
 	function handleMouseMove(e:MouseEvent) {
 		if (dragProperty == null) return;
-		dragInput.text = Std.string(roundToSignificant(dragStartValue + dragStartValue * ((e.stageX - dragStartX) / DRAG_RANGE)));
+		dragPrecision = 2;
+		if (e.ctrlKey) dragPrecision = 3;
+		if (e.shiftKey) dragPrecision = 1;
+		
+		dragInput.text = Std.string(roundToSignificant(dragStartValue + dragStartValue * ((e.stageX - dragStartX) / DRAG_RANGE), dragPrecision));
 	}
 	
 	function handleLabelRoll(e:MouseEvent) {
@@ -155,14 +160,14 @@ class TogglerUI extends Sprite {
 	}
 	
 	// http://stackoverflow.com/a/1581007
-	static function roundToSignificant(num:Float, n:Int = 2) {
-		if (num == 0) return .0;
+	static function roundToSignificant(value:Float, digits:Int = 2) {
+		if (value == 0) return .0;
 		
-		var d = Math.ceil(Math.log(num < 0 ? -num: num) * 0.4342944819032518); // log10 of value
-		var power = n - Std.int(d);
+		var d = Math.ceil(Math.log(value < 0 ? -value: value) * 0.4342944819032518); // log10 of value
+		var power = digits - Std.int(d);
 
 		var magnitude = Math.pow(10, power);
-		var shifted = Math.round(num * magnitude);
+		var shifted = Math.round(value * magnitude);
 		return shifted / magnitude;
 	}
 	
