@@ -31,7 +31,6 @@ package com.bit101.components;
 import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
 import flash.events.Event;
-import flash.filters.DropShadowFilter;
 
 class Meter extends Component
 {
@@ -225,7 +224,6 @@ class Meter extends Component
 		_needle.graphics.clear();
 		_needle.graphics.beginFill(0xff0000);
 		_needle.graphics.drawRect(-0.5, -_height * 1.10, 1, _height * 1.10);
-		_needle.filters = [new DropShadowFilter(4, 0, 0, 1, 3, 3, .2)];
 		
 		_needleMask.graphics.clear();
 		_needleMask.graphics.beginFill(0);

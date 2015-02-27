@@ -112,9 +112,6 @@ class ColorChooser extends Component
 		
 		_swatch = new Sprite();
 		_swatch.x = 50;
-		#if flash
-		_swatch.filters = [getShadow(2, true)];
-		#end
 		addChild(_swatch);
 		
 		_colorsContainer = new Sprite();

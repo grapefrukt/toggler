@@ -107,15 +107,9 @@ class Slider extends Component
 	override private function addChildren():Void
 	{
 		_back = new Sprite();
-		#if flash
-		_back.filters = [getShadow(2, true)];
-		#end
 		addChild(_back);
 		
 		_handle = new Sprite();
-		#if flash
-		_handle.filters = [getShadow(1)];
-		#end
 		_handle.addEventListener(MouseEvent.MOUSE_DOWN, onDrag);
 		_handle.buttonMode = true;
 		_handle.useHandCursor = true;

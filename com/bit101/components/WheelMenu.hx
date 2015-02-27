@@ -35,7 +35,6 @@ package com.bit101.components;
 import flash.display.DisplayObjectContainer;
 import flash.events.Event;
 import flash.events.MouseEvent;
-import flash.filters.DropShadowFilter;
 
 import flash.display.DisplayObject;
 import flash.display.Sprite;
@@ -92,8 +91,6 @@ class WheelMenu extends Component
 		super.init();
 		_items = new Array<Dynamic>();
 		makeButtons();
-		
-		filters = [new DropShadowFilter(4, 45, 0, 1, 4, 4, .2, 4)];
 	}
 	
 	/**

@@ -39,7 +39,6 @@ import flash.display.Stage;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.events.Event;
-import flash.filters.DropShadowFilter;
 
 class Component extends Sprite
 {
@@ -85,16 +84,6 @@ class Component extends Sprite
 	}
 	
 	/**
-	 * DropShadowFilter factory method, used in many of the components.
-	 * @param dist The distance of the shadow.
-	 * @param knockout Whether or not to create a knocked out shadow.
-	 */
-	private function getShadow(dist:Float, knockout:Bool = false):DropShadowFilter
-	{
-		return new DropShadowFilter(dist, 45, Style.DROPSHADOW, 1, dist, dist, .3, 1, knockout);
-	}
-	
-	/**
 	 * Marks the component to be redrawn on the next frame.
 	 */
 	private function invalidate():Void
@@ -102,8 +91,6 @@ class Component extends Sprite
 //			draw();
 		addEventListener(Event.ENTER_FRAME, onInvalidate);
 	}
-	
-	
 	
 	
 	///////////////////////////////////
@@ -293,11 +280,4 @@ class Component extends Sprite
 		return _enabled;
 	}
 	
-	#if (!flash && !html5)
-	override function set_filters(value:Array<Dynamic>):Array<Dynamic>
-	{
-		return value;
-	}
-	#end
-
 }

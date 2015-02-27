@@ -37,7 +37,6 @@ class Panel extends Component
 	private var _mask:Sprite;
 	private var _background:Sprite;
 	private var _color:Int = -1;
-	private var _shadow:Bool = true;
 	private var _gridSize:Int = 10;
 	private var _showGrid:Bool = false;
 	private var _gridColor:Int = 0xd0d0d0;
@@ -85,9 +84,6 @@ class Panel extends Component
 		content = new Sprite();
 		super.addChild(content);
 		content.mask = _mask;
-		#if flash
-		filters = [getShadow(2, true)];
-		#end
 	}
 	
 	
@@ -174,32 +170,7 @@ class Panel extends Component
 	///////////////////////////////////
 	// getter/setters
 	///////////////////////////////////
-	
-	/**
-	 * Gets / sets whether or not this Panel will have an inner shadow.
-	 */
-	public var shadow(get_shadow, set_shadow):Bool;
-	
-	private function set_shadow(b:Bool):Bool
-	{
-		_shadow = b;
-		#if flash
-		if(_shadow)
-		{
-			filters = [getShadow(2, true)];
-		}
-		else
-		{
-			filters = [];
-		}
-		#end
-		return b;
-	}
-	private function get_shadow():Bool
-	{
-		return _shadow;
-	}
-	
+		
 	/**
 	 * Gets / sets the backgrond color of this panel.
 	 */

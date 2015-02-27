@@ -85,15 +85,9 @@ class CheckBox extends Component
 	override private function addChildren():Void
 	{
 		_back = new Sprite();
-		#if flash
-		_back.filters = [getShadow(2, true)];
-		#end
 		addChild(_back);
 		
 		_button = new Sprite();
-		#if flash
-		_button.filters = [getShadow(1)];
-		#end
 		_button.visible = false;
 		addChild(_button);
 		

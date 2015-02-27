@@ -73,9 +73,6 @@ class InputText extends Component
 	override private function addChildren():Void
 	{
 		_back = new Sprite();
-		#if flash
-		_back.filters = [getShadow(2, true)];
-		#end
 		addChild(_back);
 		
 		_tf = new TextField();

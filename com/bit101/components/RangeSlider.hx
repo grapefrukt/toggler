@@ -126,24 +126,15 @@ class RangeSlider extends Component
 	{
 		super.addChildren();
 		_back = new Sprite();
-		#if flash
-		_back.filters = [getShadow(2, true)];
-		#end
 		addChild(_back);
 		
 		_minHandle = new Sprite();
-		#if flash
-		_minHandle.filters = [getShadow(1)];
-		#end
 		_minHandle.addEventListener(MouseEvent.MOUSE_DOWN, onDragMin);
 		_minHandle.buttonMode = true;
 		_minHandle.useHandCursor = true;
 		addChild(_minHandle);
 		
 		_maxHandle = new Sprite();
-		#if flash
-		_maxHandle.filters = [getShadow(1)];
-		#end
 		_maxHandle.addEventListener(MouseEvent.MOUSE_DOWN, onDragMax);
 		_maxHandle.buttonMode = true;
 		_maxHandle.useHandCursor = true;

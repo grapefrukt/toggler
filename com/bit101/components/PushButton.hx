@@ -79,17 +79,10 @@ class PushButton extends Component
 	override private function addChildren():Void
 	{
 		_back = new Sprite();
-		#if flash
-		_back.filters = [getShadow(2, true)];
-		_back.mouseEnabled = false;
-		#end
 		addChild(_back);
 		
 		_face = new Sprite();
 		_face.mouseEnabled = false;
-		#if flash
-		_face.filters = [getShadow(1)];
-		#end
 		_face.x = 1;
 		_face.y = 1;
 		addChild(_face);
@@ -178,12 +171,6 @@ class PushButton extends Component
 	private function onMouseOut(event:MouseEvent):Void
 	{
 		_over = false;
-		if(!_down)
-		{
-			#if flash
-			_face.filters = [getShadow(1)];
-			#end
-		}
 		removeEventListener(MouseEvent.ROLL_OUT, onMouseOut);
 	}
 	
@@ -195,9 +182,6 @@ class PushButton extends Component
 	{
 		_down = true;
 		drawFace();
-		#if flash
-		_face.filters = [getShadow(1, true)];
-		#end
 		stage.addEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
 	}
 	
@@ -213,9 +197,6 @@ class PushButton extends Component
 		}
 		_down = _selected;
 		drawFace();
-		#if flash
-		_face.filters = [getShadow(1, _selected)];
-		#end
 		stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseGoUp);
 	}
 	
@@ -253,9 +234,6 @@ class PushButton extends Component
 		
 		_selected = value;
 		_down = _selected;
-		#if flash
-		_face.filters = [getShadow(1, _selected)];
-		#end
 		drawFace();
 		return value;
 	}

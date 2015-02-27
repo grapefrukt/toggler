@@ -42,7 +42,6 @@ class Window extends Component
 	private var _titleLabel:Label;
 	private var _panel:Panel;
 	private var _color:Int = -1;
-	private var _shadow:Bool = true;
 	private var _draggable:Bool = true;
 	private var _minimizeButton:Sprite;
 	private var _hasMinimizeButton:Bool = false;
@@ -128,9 +127,6 @@ class Window extends Component
 		
 		_closeButton = new PushButton(null, 86, 6, "", onClose);
 		_closeButton.setSize(8, 8);
-		#if flash
-		filters = [getShadow(4, false)];
-		#end
 	}
 	
 	///////////////////////////////////
@@ -223,31 +219,6 @@ class Window extends Component
 	///////////////////////////////////
 	// getter/setters
 	///////////////////////////////////
-	
-	/**
-	 * Gets / sets whether or not this Window will have a drop shadow.
-	 */
-	public var shadow(get_shadow, set_shadow):Bool;
-	
-	private function set_shadow(b:Bool):Bool
-	{
-		_shadow = b;
-		#if flash
-		if(_shadow)
-		{
-			filters = [getShadow(4, false)];
-		}
-		else
-		{
-			filters = [];
-		}
-		#end
-		return b;
-	}
-	private function get_shadow():Bool
-	{
-		return _shadow;
-	}
 	
 	/**
 	 * Gets / sets the background color of this panel.
